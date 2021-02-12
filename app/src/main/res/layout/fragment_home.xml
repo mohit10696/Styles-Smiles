@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment"
+    android:background="@color/grey">
+
+    <RelativeLayout
+        android:id="@+id/rl_selectcity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10px"
+        android:background="@color/lightorange"
+
+        >
+
+        <ImageView
+            android:id="@+id/iv_map"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="50px"
+            android:layout_centerVertical="true"
+            android:src="@drawable/map" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/iv_map"
+            android:layout_marginLeft="30px"
+            android:textSize="50px"
+            android:text="Surat" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_changecity"
+            android:text="Change city"
+            android:layout_marginRight="40px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50px"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/black"
+
+            />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_saloon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_selectcity"
+        android:padding="50px" />
+</RelativeLayout>

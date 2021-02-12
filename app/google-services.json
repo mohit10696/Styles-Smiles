@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "706982597973",
+    "project_id": "style-smile-7218d",
+    "storage_bucket": "style-smile-7218d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706982597973:android:d0aa61681da1dc23e8cbdc",
+        "android_client_info": {
+          "package_name": "com.example.stylessmiles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706982597973-9at2rs2acnd3oo8ahkn9pla7pu8la2fe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnbfxMMC43UOMAb1kwvYmgHK7WFAL__ps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706982597973-9at2rs2acnd3oo8ahkn9pla7pu8la2fe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
-    tools:context=".Login">
+    tools:context=".Activity.Login">
 
     <RelativeLayout
         android:background="@color/black"
@@ -36,7 +36,7 @@
         <TextView
             android:layout_marginTop="100px"
             android:id="@+id/txtLogin"
-            android:textColor="@color/purple_200"
+            android:textColor="@color/yellowish"
             android:textSize="100px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,10 +67,11 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@+id/et_email"
-            android:hint="Password"
+            android:hint="Password (min length: 6)"
             />
 
         <Button
+            android:textColor="@color/white"
             android:background="@drawable/btn_bg_selector"
             android:layout_marginTop="80px"
             android:layout_centerHorizontal="true"
@@ -78,6 +79,7 @@
             android:layout_below="@+id/et_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="login"
             android:text="LOGIN"/>
 
         <TextView
@@ -89,6 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_marginBottom="100px"
             android:text="Don't have an account ? Sign up"
+            android:clickable="true"
+            android:onClick="loadSignup"
             android:layout_height="wrap_content"/>
 
 
