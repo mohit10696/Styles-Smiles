@@ -2,6 +2,7 @@ package com.example.stylessmiles;
 
 import com.example.stylessmiles.model.SaloonModel;
 import com.example.stylessmiles.model.usermodel;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class centralStore {
 
     public static synchronized centralStore getInstance() {
         if (mInstance != null) {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             return mInstance;
         } else {
             return new centralStore();

@@ -1,18 +1,18 @@
 package com.example.stylessmiles.adpater;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.stylessmiles.Activity.SaloonProfileActivity;
 import com.example.stylessmiles.R;
 import com.example.stylessmiles.model.SaloonModel;
 import com.squareup.picasso.Picasso;
@@ -25,7 +25,6 @@ public class SaloonListAdapter extends RecyclerView.Adapter<SaloonListAdapter.Vi
     public SaloonListAdapter(List<SaloonModel> saloonList,Context context) {
         this.SaloonList = saloonList;
         this.context = context;
-//        Log.e("saloon", "SaloonListAdapter: "+this.SaloonList.get(0).getName() );
     }
 
     @NonNull
@@ -45,7 +44,9 @@ public class SaloonListAdapter extends RecyclerView.Adapter<SaloonListAdapter.Vi
         holder.row_saloonList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, SaloonList.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, SaloonProfileActivity.class);
+                intent.putExtra("saloonname",SaloonList.get(position).getName());
+                context.startActivity(intent);
             }
         });
         Picasso.get().load(SaloonList.get(position).getImgurl()).into(holder.saloonImage);
