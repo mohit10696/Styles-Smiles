@@ -1,18 +1,15 @@
 package com.example.stylessmiles.Activity;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -20,18 +17,16 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.stylessmiles.R;
-import com.example.stylessmiles.centralStore;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-import butterknife.BindView;
-
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     FirebaseAuth firebaseAuth;
     TextView tv_username;
     TextView tv_email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +49,14 @@ public class MainActivity extends AppCompatActivity  {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.nav_logout: logout();
+                switch (item.getItemId()) {
+                    case R.id.nav_logout: {
+                        logout();
+                        break;
+                    }
+                    default: {
+                        navController.navigate(item.getItemId());
+                    }
                 }
                 return true;
             }
@@ -83,5 +84,9 @@ public class MainActivity extends AppCompatActivity  {
         firebaseAuth.signOut(); //End user session
         startActivity(new Intent(MainActivity.this, Login.class)); //Go back to home page
         finish();
+    }
+
+    public void loadCartActivity(MenuItem item) {
+        startActivity(new Intent(getApplicationContext(),Cart.class));
     }
 }

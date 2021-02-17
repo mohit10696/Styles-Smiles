@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    tools:context=".Activity.Cart">
+
+    <TextView
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="30px"
+        android:id="@+id/tv_saloonname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:text="saloonname"
+        />
+    <RelativeLayout
+        android:layout_below="@+id/tv_saloonname"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/noticetext"
+        android:padding="30px">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_services"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rv_services"
+            android:layout_marginBottom="1dp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/noticetext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rel_1"
+        android:text="Note : All the orders &amp; services will be cash on delivery"
+        android:textAlignment="center"
+        android:textColor="@color/darkergrey" />
+
+    <RelativeLayout
+
+        android:id="@+id/rel_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:paddingLeft="60px"
+        android:paddingTop="60px"
+        android:paddingRight="60px"
+        android:paddingBottom="60px">
+
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20px"
+            android:lines="2"
+            android:text="ADDress avse aya"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_address"
+            android:text="Total"
+            android:textColor="@color/darkergrey" />
+
+        <TextView
+            android:id="@+id/tv_totalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_total"
+            android:text="Rs. 1485"
+            android:textColor="@color/black"
+            android:textSize="60px" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_address"
+            android:layout_alignParentEnd="true"
+            android:gravity="center_vertical"
+            android:text="Place Order" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

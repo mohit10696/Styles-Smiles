@@ -5,7 +5,29 @@ public class usermodel {
     String lastname;
     String address;
     String contact;
+    String pincode;
     String email;
+
+    public usermodel(){
+
+    }
+    public usermodel(String firstname, String lastname, String address, String contact, String pincode, String email) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.contact = contact;
+        this.pincode = pincode;
+        this.email = email;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+    }
+
 
     public String getFirstname() {
         return firstname;

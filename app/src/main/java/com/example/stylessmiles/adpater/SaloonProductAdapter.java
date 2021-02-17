@@ -1,6 +1,7 @@
 package com.example.stylessmiles.adpater;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.stylessmiles.Activity.Cart;
 import com.example.stylessmiles.R;
+import com.example.stylessmiles.centralStore;
 import com.example.stylessmiles.model.ProductModel;
 import com.squareup.picasso.Picasso;
 
@@ -32,7 +35,7 @@ public class SaloonProductAdapter extends RecyclerView.Adapter<SaloonProductAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.row_products, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.row_products, parent, false);
         SaloonProductAdapter.ViewHolder viewHolder = new SaloonProductAdapter.ViewHolder(listItem);
         return viewHolder;
     }
@@ -40,12 +43,16 @@ public class SaloonProductAdapter extends RecyclerView.Adapter<SaloonProductAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tv_servicename.setText(productModels.get(position).getName().substring(0, 1).toUpperCase() + productModels.get(position).getName().substring(1));
-        holder.tv_price.setText("Rs :"+productModels.get(position).getPrice());
+        holder.tv_price.setText("Rs :" + productModels.get(position).getPrice());
         Picasso.get().load(productModels.get(position).getImage()).into(holder.iv_product);
         holder.btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Added to cart", Toast.LENGTH_SHORT).show();
+                holder.btn_add.setText("ADDED");
+                holder.btn_add.setEnabled(false);
+                centralStore.getInstance().cart.addProduct(productModels.get(position));
+                centralStore.getInstance().synccart();
             }
         });
     }

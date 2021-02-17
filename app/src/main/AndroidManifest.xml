@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StylesSmiles">
         <activity
+            android:name=".Activity.Cart"
+            android:parentActivityName=".Activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activity.MainActivity" />
+        </activity>
+        <activity
             android:name=".Activity.SaloonProfileActivity"
             android:parentActivityName=".Activity.MainActivity">
             <meta-data

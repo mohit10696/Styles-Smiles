@@ -6,6 +6,11 @@ public class SaloonModel {
     private String city;
     private String imgurl;
 
+    public SaloonModel() {
+
+    }
+
+
     public SaloonModel(String name, String address, String city, String imgurl) {
         this.name = name;
         this.address = address;

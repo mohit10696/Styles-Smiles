@@ -89,6 +89,7 @@ public class Login extends AppCompatActivity {
                                     usermodel.setFirstname(task.getResult().child("firstname").getValue().toString());
                                     usermodel.setLastname(task.getResult().child("lastname").getValue().toString());
                                     usermodel.setEmail(task.getResult().child("email").getValue().toString());
+                                    usermodel.setAddress(task.getResult().child("address").getValue().toString());
                                     centralStore.getInstance().user = usermodel;
                                     Gson gson = new Gson();
                                     String json = gson.toJson(usermodel);
