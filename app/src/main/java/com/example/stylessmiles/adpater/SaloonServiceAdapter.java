@@ -52,9 +52,11 @@ public class SaloonServiceAdapter extends RecyclerView.Adapter<SaloonServiceAdap
                 if (centralStore.getInstance().cart.setSaloon(saloonname)) {
                     holder.btn_add.setText("ADDED");
                     holder.btn_add.setEnabled(false);
-                    Toast.makeText(context, "added to cart", Toast.LENGTH_SHORT).show();
-                    centralStore.getInstance().cart.addService(servicesModels.get(position));
-                    centralStore.getInstance().synccart();
+                    Toast.makeText(context, centralStore.getInstance().cart.addService(servicesModels.get(position))
+                            , Toast.LENGTH_SHORT).show();
+                    //centralStore.getInstance().synccart();
+                } else {
+                    Toast.makeText(context, "You can't add services from different salon...", Toast.LENGTH_SHORT).show();
                 }
             }
         });

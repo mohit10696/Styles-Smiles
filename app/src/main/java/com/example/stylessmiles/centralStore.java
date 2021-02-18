@@ -25,7 +25,7 @@ public class centralStore {
     public static DatabaseReference mDatabase;
     public static synchronized centralStore getInstance() {
         if (mInstance != null) {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             return mInstance;
         } else {
             return new centralStore();
@@ -58,5 +58,12 @@ public class centralStore {
             }
         });
     }
+
+    public static String capitalize(String str)
+    {
+        if(str == null) return str;
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
+    }
+
 
 }

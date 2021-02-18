@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.kloadingspin.KLoadingSpin;
 import com.example.stylessmiles.R;
 import com.example.stylessmiles.centralStore;
 import com.example.stylessmiles.model.usermodel;
@@ -31,6 +32,8 @@ public class Login extends AppCompatActivity {
     EditText et_email;
     @BindView(R.id.et_password)
     EditText et_password;
+    @BindView(R.id.LoadingSpin)
+    KLoadingSpin loadingspin;
     SharedPreferences mPrefs;
     FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
@@ -77,6 +80,8 @@ public class Login extends AppCompatActivity {
             Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
             return;
         }
+        loadingspin.setIsVisible(true);
+        loadingspin.startAnimation();
         firebaseAuth.signInWithEmailAndPassword(et_email.getText().toString().trim(), et_password.getText().toString().trim())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -95,6 +100,8 @@ public class Login extends AppCompatActivity {
                                     String json = gson.toJson(usermodel);
                                     prefsEditor.putString("user", json);
                                     prefsEditor.commit();
+                                    loadingspin.stopAnimation();
+                                    loadingspin.setIsVisible(false);
                                     Toast.makeText(Login.this, "Login successfull", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(Login.this, MainActivity.class));
                                     finish();

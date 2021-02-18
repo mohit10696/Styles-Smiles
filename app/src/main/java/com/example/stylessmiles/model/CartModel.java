@@ -1,5 +1,7 @@
 package com.example.stylessmiles.model;
 
+import com.example.stylessmiles.centralStore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,15 +12,30 @@ public class CartModel {
     List<ServicesModel> services = new ArrayList<ServicesModel>();
     List<Integer> productQuantity = new ArrayList<Integer>();
 
-    public void addProduct(ProductModel product) {
+    public String addProduct(ProductModel product) {
+//        return String.valueOf(this.products.indexOf(product));
+        for (ProductModel p : this.products) {
+            if (p.name == product.name) {
+                return "Product is already in cart";
+            }
+        }
+
         this.products.add(product);
         this.productQuantity.add(1);
         Calcost();
+        return "Product added";
+
     }
 
-    public void addService(ServicesModel servicesModel) {
+    public String addService(ServicesModel servicesModel) {
+        for (ServicesModel p : this.services) {
+            if (p.Name == servicesModel.Name) {
+                return "Service is already in cart";
+            }
+        }
         this.services.add(servicesModel);
         Calcost();
+        return "Service added";
     }
 
     public void removeAllService() {
@@ -36,9 +53,11 @@ public class CartModel {
         Calcost();
     }
 
-    public void updateQunatity(int index, int qunatity) {
-        this.productQuantity.set(index, qunatity);
+    public int updateQunatity(int index, int qunatity) {
+        int newQunatity = this.productQuantity.get(index)+ qunatity;
+        this.productQuantity.set(index, newQunatity);
         Calcost();
+        return newQunatity;
     }
 
     public void Calcost() {
@@ -49,19 +68,26 @@ public class CartModel {
         for (ServicesModel servicesModel : services) {
             totalPrice = totalPrice + Integer.parseInt(servicesModel.getPrice());
         }
+        centralStore.getInstance().synccart();
     }
 
     public boolean setSaloon(String saloonname) {
-        if(this.saloonname.isEmpty()){
+        if (this.saloonname.isEmpty()) {
             this.saloonname = saloonname;
             return true;
-        }
-        else if(this.saloonname.equals(saloonname)){
+        } else if (this.saloonname.equals(saloonname)) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
+    }
+
+    public int getProductQuantity(int id) {
+        return this.productQuantity.get(id);
+    }
+
+    public void addProductQuantity(int q){
+        this.productQuantity.add(q);
     }
 
     public int getTotalPrice() {
@@ -85,7 +111,11 @@ public class CartModel {
     }
 
     public void setProducts(List<ProductModel> products) {
-        this.products = products;
+//        this.products = products;
+        for(ProductModel productModel : products)
+        {
+            this.products.add(productModel);
+        }
     }
 
     public List<ServicesModel> getServices() {
@@ -93,7 +123,11 @@ public class CartModel {
     }
 
     public void setServices(List<ServicesModel> services) {
-        this.services = services;
+        for(ServicesModel servicesModel : services)
+        {
+            this.services.add(servicesModel);
+        }
+//        this.services = services;
     }
 
     public List<Integer> getProductQuantity() {
@@ -101,6 +135,9 @@ public class CartModel {
     }
 
     public void setProductQuantity(List<Integer> productQuantity) {
-        this.productQuantity = productQuantity;
+        for (Integer i : productQuantity){
+            this.productQuantity.add(i);
+        }
+//        this.productQuantity = productQuantity;
     }
 }

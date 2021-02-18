@@ -6,6 +6,7 @@
     android:background="@color/grey"
     tools:context=".Activity.Cart">
 
+
     <TextView
         android:layout_marginLeft="30px"
         android:layout_marginTop="30px"
@@ -16,11 +17,17 @@
         android:textSize="20dp"
         android:text="saloonname"
         />
+
+    <ScrollView
+        android:layout_below="@+id/tv_saloonname"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rel_1">
     <RelativeLayout
         android:layout_below="@+id/tv_saloonname"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/noticetext"
+        android:layout_above="@id/rel_1"
         android:padding="30px">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -37,8 +44,9 @@
             android:layout_marginBottom="1dp" />
 
     </RelativeLayout>
-
+    </ScrollView>
     <TextView
+        android:background="@color/grey"
         android:id="@+id/noticetext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,16 +90,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_total"
-            android:text="Rs. 1485"
+            android:text="@string/total_price"
             android:textColor="@color/black"
             android:textSize="60px" />
 
         <Button
+            android:id="@+id/placeorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_address"
             android:layout_alignParentEnd="true"
             android:gravity="center_vertical"
+            android:onClick="placeOrder"
             android:text="Place Order" />
 
     </RelativeLayout>

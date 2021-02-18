@@ -48,11 +48,10 @@ public class SaloonProductAdapter extends RecyclerView.Adapter<SaloonProductAdap
         holder.btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Added to cart", Toast.LENGTH_SHORT).show();
                 holder.btn_add.setText("ADDED");
                 holder.btn_add.setEnabled(false);
-                centralStore.getInstance().cart.addProduct(productModels.get(position));
-                centralStore.getInstance().synccart();
+                Toast.makeText(context,centralStore.getInstance().cart.addProduct(productModels.get(position)),Toast.LENGTH_SHORT).show();
+               // centralStore.getInstance().synccart();
             }
         });
     }

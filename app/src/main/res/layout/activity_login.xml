@@ -101,4 +101,16 @@
 
     </RelativeLayout>
 
+    <com.example.kloadingspin.KLoadingSpin
+        android:id="@+id/LoadingSpin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:backgroundColor="#55008DFF"
+        app:primarySpinnerColor="#ffffff"
+        app:rotationSpeedInMs="3000"
+        app:text="Please wait"
+        app:secondarySpinnerColor="#FF9800"
+        app:textColor="#ffffff"
+        app:textSize="80" />
+
 </RelativeLayout>
