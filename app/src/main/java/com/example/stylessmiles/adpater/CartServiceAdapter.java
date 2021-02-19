@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.stylessmiles.Activity.Cart;
 import com.example.stylessmiles.R;
 import com.example.stylessmiles.centralStore;
 import com.example.stylessmiles.model.ServicesModel;
@@ -42,9 +43,17 @@ public class CartServiceAdapter extends RecyclerView.Adapter<CartServiceAdapter.
         holder.tv_productname.setText(centralStore.getInstance().capitalize(servicesModels.get(position).getName()));
         holder.tv_price.setText("Rs. "+servicesModels.get(position).getPrice());
         Picasso.get().load(servicesModels.get(position).getImage()).into(holder.iv_product);
-        holder.btn_plus.setVisibility(View.GONE);
-        holder.btn_minus.setVisibility(View.GONE);
-        holder.quantity.setVisibility(View.GONE);
+        holder.btn_plus.setVisibility(View.INVISIBLE);
+        holder.btn_minus.setVisibility(View.VISIBLE);
+        holder.quantity.setVisibility(View.INVISIBLE);
+        holder.btn_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                centralStore.getInstance().cart.removeService(position);
+                ((Cart)context).updateTotalPrice();
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

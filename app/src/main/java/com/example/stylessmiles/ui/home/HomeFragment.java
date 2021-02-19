@@ -1,10 +1,16 @@
 package com.example.stylessmiles.ui.home;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -37,17 +43,49 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.recycle_saloon)
     RecyclerView saloonRecycle;
     View root;
+    TextView tv_selectcity;
+    String[] city = {"Surat", "Bharuch", "Ankleshwar", "Ahmedabad"};
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
-
+        tv_selectcity = root.findViewById(R.id.tv_changecity);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         saloons = new ArrayList<SaloonModel>();
 
         loadSaloon();
-
+        CityChange();
         return root;
+    }
+
+    private void CityChange() {
+        tv_selectcity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+                View mView = getLayoutInflater().inflate(R.layout.selectcity_layout, null);
+                final Spinner selectCity = (Spinner) mView.findViewById(R.id.sp_selectcity);
+                ArrayAdapter aa = new ArrayAdapter(mView.getContext(), android.R.layout.simple_spinner_item, city);
+                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                selectCity.setAdapter(aa);
+                selectCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                Button Submit = (Button) mView.findViewById(R.id.btn_submit);
+                Button Cancel = (Button) mView.findViewById(R.id.btn_cancel);
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+            }
+        });
     }
 
     private void loadSaloon() {

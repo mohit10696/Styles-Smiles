@@ -49,6 +49,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                 Toast.makeText(context, String.valueOf(centralStore.getInstance().cart.getProductQuantity().size()), Toast.LENGTH_SHORT).show();
                 if (centralStore.getInstance().cart.getProductQuantity(position) == 10) {
                     Toast.makeText(context, "You can't order more then 10 items at a time", Toast.LENGTH_SHORT).show();
+//                    ((Cart)context).updateTotalPrice();
                 } else
                 {
                     holder.tv_quantity.setText(String.valueOf(centralStore.getInstance().cart.updateQunatity(position, +1)));
@@ -60,7 +61,10 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
             @Override
             public void onClick(View v) {
                 if (centralStore.getInstance().cart.getProductQuantity(position) == 1) {
-                    Toast.makeText(context, "Minimum limit reached", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "Minimum limit reached", Toast.LENGTH_SHORT).show();
+                    centralStore.getInstance().cart.removeProduct(position);
+                    ((Cart)context).updateTotalPrice();
+                    notifyDataSetChanged();
                 } else
                 {
                    holder.tv_quantity.setText(String.valueOf(centralStore.getInstance().cart.updateQunatity(position, -1)));

@@ -9,7 +9,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
@@ -17,7 +20,7 @@ import static android.content.ContentValues.TAG;
 public class centralStore {
 
     private static centralStore mInstance;
-
+    public static  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sss'Z'");
     public static List<SaloonModel> saloons = new ArrayList<>();
     public static usermodel user = new usermodel();
     public static CartModel cart = new CartModel();
@@ -65,5 +68,12 @@ public class centralStore {
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
+    public static Date getDateobject(String date) throws ParseException {
+        return dateFormat.parse(date);
+    }
+
+    public static String getStringDate(Date date){
+        return dateFormat.format(date);
+    }
 
 }

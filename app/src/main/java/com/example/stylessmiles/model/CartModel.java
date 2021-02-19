@@ -45,11 +45,15 @@ public class CartModel {
 
     public void removeService(int index) {
         this.services.remove(index);
+        if(this.services.size() == 0){
+            this.saloonname = "";
+        }
         Calcost();
     }
 
     public void removeProduct(int index) {
         this.products.remove(index);
+        this.productQuantity.remove(index);
         Calcost();
     }
 
