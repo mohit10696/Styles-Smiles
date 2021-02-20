@@ -1,7 +1,5 @@
 package com.example.stylessmiles.model;
 
-import java.util.Date;
-import java.util.Date;
 
 public class OrderModel {
     CartModel order = new CartModel();
@@ -11,7 +9,7 @@ public class OrderModel {
     String orderStatus;
     String orderNo = "";
 
-    public OrderModel(){
+    public OrderModel() {
     }
 
     public OrderModel(CartModel order, String email, String orderDate, String appoimentDate, String orderStatus) {

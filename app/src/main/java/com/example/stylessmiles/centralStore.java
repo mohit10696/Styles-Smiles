@@ -20,7 +20,7 @@ import static android.content.ContentValues.TAG;
 public class centralStore {
 
     private static centralStore mInstance;
-    public static  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:sss'Z'");
+    public static  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:sss' '");
     public static List<SaloonModel> saloons = new ArrayList<>();
     public static usermodel user = new usermodel();
     public static CartModel cart = new CartModel();
@@ -33,6 +33,17 @@ public class centralStore {
         } else {
             return new centralStore();
         }
+    }
+
+    public static String getSaloonImage(String salonname){
+
+        for(int i = 0 ; i < saloons.size(); i++){
+            Log.e(salonname, "getSaloonImage: "+saloons.get(i).getName() );
+            if(saloons.get(i).getName().equals(salonname)){
+                return saloons.get(i).getImgurl();
+            }
+        }
+        return "https://www.thermaxglobal.com/wp-content/uploads/2020/05/image-not-found.jpg";
     }
 
     public static List<SaloonModel> getSaloons() {

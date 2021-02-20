@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:src="@drawable/dummy"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:scaleType="fitXY"
+        android:id="@+id/tv_product"/>
+
+    <TextView
+        android:id="@+id/tv_productname"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Full massage"
+        android:layout_marginLeft="40px"
+        android:layout_toRightOf="@+id/tv_product"/>
+
+    <TextView
+        android:id="@+id/tv_productprice"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rs 450"
+        android:layout_marginLeft="40px"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

@@ -11,6 +11,10 @@ public class ProductModel {
         this.image = image;
     }
 
+    public ProductModel() {
+
+    }
+
     public String getName() {
         return name;
     }

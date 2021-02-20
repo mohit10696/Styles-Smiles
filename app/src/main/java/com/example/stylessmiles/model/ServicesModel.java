@@ -24,6 +24,9 @@ public class ServicesModel {
         Price = price;
     }
 
+    public ServicesModel() {
+    }
+
     public String getName() {
         return Name;
     }

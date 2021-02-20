@@ -97,11 +97,16 @@ public class Cart extends AppCompatActivity implements DatePickerDialog.OnDateSe
     }
 
     public void placeOrder(View view) throws ParseException {
+        if(centralStore.cart.getSaloonname().equals("")){
+            Toast.makeText(this, "Please select salon or your cart is empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if(!setTime){
             Toast.makeText(this, "Please select date & time", Toast.LENGTH_SHORT).show();
             PickDateAndTime();
             return;
         }
+
         Calendar appoitmentdate = Calendar.getInstance();
         appoitmentdate.set(myYear,myMonth,myday,myHour,myMinute);
 
