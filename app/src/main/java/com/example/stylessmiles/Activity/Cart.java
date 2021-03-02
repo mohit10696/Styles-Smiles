@@ -110,7 +110,7 @@ public class Cart extends AppCompatActivity implements DatePickerDialog.OnDateSe
         Calendar appoitmentdate = Calendar.getInstance();
         appoitmentdate.set(myYear,myMonth,myday,myHour,myMinute);
 
-        OrderModel orderModel = new OrderModel(centralStore.getInstance().cart,centralStore.getUser().getEmail(),centralStore.getStringDate(Calendar.getInstance().getTime()),centralStore.getStringDate(appoitmentdate.getTime()),"Order Placed");
+        OrderModel orderModel = new OrderModel(centralStore.getInstance().cart,centralStore.getUser(),centralStore.getStringDate(Calendar.getInstance().getTime()),centralStore.getStringDate(appoitmentdate.getTime()),"Order Placed");
         mDatabase.child("Order").push().setValue(orderModel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

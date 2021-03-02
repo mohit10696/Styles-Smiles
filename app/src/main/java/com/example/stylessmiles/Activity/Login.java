@@ -1,14 +1,14 @@
 package com.example.stylessmiles.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kloadingspin.KLoadingSpin;
 import com.example.stylessmiles.R;
@@ -19,8 +19,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import butterknife.BindView;
@@ -39,6 +41,7 @@ public class Login extends AppCompatActivity {
     private DatabaseReference mDatabase;
     FirebaseDatabase rootnode;
     SharedPreferences.Editor prefsEditor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -55,13 +58,21 @@ public class Login extends AppCompatActivity {
         mDatabase = rootnode.getReference("user");
         mPrefs = getPreferences(MODE_PRIVATE);
         prefsEditor = mPrefs.edit();
-        if(firebaseAuth.getCurrentUser() != null ){
-            Gson gson = new Gson();
-            String json = mPrefs.getString("user", "");
-            usermodel usermodel = gson.fromJson(json, usermodel.class);
-            centralStore.getInstance().user = usermodel;
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+        if (firebaseAuth.getCurrentUser() != null) {
+            if (!mPrefs.getString("SalonMail", "").equals("")) {
+                centralStore.getInstance().salonMail = mPrefs.getString("SalonMail", "");
+                startActivity(new Intent(Login.this, OrderStatus.class));
+                finish();
+            }
+            else{
+                Gson gson = new Gson();
+                String json = mPrefs.getString("user", "");
+                usermodel usermodel = gson.fromJson(json, usermodel.class);
+                centralStore.getInstance().user = usermodel;
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            }
+
         }
 
     }
@@ -87,14 +98,14 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            mDatabase.child(et_email.getText().toString().trim().replace('.','_')).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            mDatabase.child(et_email.getText().toString().trim().replace('.', '_')).addValueEventListener(new ValueEventListener() {
                                 @Override
-                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     usermodel usermodel = new usermodel();
-                                    usermodel.setFirstname(task.getResult().child("firstname").getValue().toString());
-                                    usermodel.setLastname(task.getResult().child("lastname").getValue().toString());
-                                    usermodel.setEmail(task.getResult().child("email").getValue().toString());
-                                    usermodel.setAddress(task.getResult().child("address").getValue().toString());
+                                    usermodel.setFirstname(snapshot.child("firstname").getValue().toString());
+                                    usermodel.setLastname(snapshot.child("lastname").getValue().toString());
+                                    usermodel.setEmail(snapshot.child("email").getValue().toString());
+                                    usermodel.setAddress(snapshot.child("address").getValue().toString());
                                     centralStore.getInstance().user = usermodel;
                                     Gson gson = new Gson();
                                     String json = gson.toJson(usermodel);
@@ -102,14 +113,19 @@ public class Login extends AppCompatActivity {
                                     prefsEditor.commit();
                                     loadingspin.stopAnimation();
                                     loadingspin.setIsVisible(false);
-                                    Toast.makeText(Login.this, "Login successfull", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(Login.this, MainActivity.class));
                                     finish();
                                 }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+
                             });
-                        }
-                        else{
-                            Toast.makeText(Login.this,"Invalid login id or password", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(Login.this, "Invalid login id or password", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -118,4 +134,33 @@ public class Login extends AppCompatActivity {
     }
 
 
+    public void loginAsBusiness(View view) {
+        String et_email = this.et_email.getText().toString();
+        String et_password = this.et_password.getText().toString();
+        String[] parts = et_email.split("@");
+        if (parts.length == 2) {
+//            String[] sub_part = parts[1].split(".");
+            if (parts[1].toLowerCase().equals("salon.com")) {
+                firebaseAuth.signInWithEmailAndPassword(et_email, et_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            prefsEditor.putString("SalonMail", et_email);
+                            prefsEditor.commit();
+                            startActivity(new Intent(Login.this, OrderStatus.class));
+                            finish();
+                        } else {
+                            Toast.makeText(Login.this, "Invalid login id or password", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            } else {
+                Toast.makeText(this, "Sorry! you don't have an business account", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } else {
+            Toast.makeText(this, "Sorry! you don't have an business account", Toast.LENGTH_SHORT).show();
+            return;
+        }
+    }
 }

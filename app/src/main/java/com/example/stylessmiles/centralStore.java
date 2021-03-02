@@ -18,7 +18,7 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 public class centralStore {
-
+    public static String salonMail = "";
     private static centralStore mInstance;
     public static  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:sss' '");
     public static List<SaloonModel> saloons = new ArrayList<>();

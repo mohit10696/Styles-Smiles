@@ -1,9 +1,11 @@
 package com.example.stylessmiles.model;
 
 
+import com.example.stylessmiles.Activity.OrderStatus;
+
 public class OrderModel {
     CartModel order = new CartModel();
-    String email = "";
+    usermodel user = new usermodel();
     String orderDate;
     String AppoimentDate;
     String orderStatus;
@@ -12,9 +14,9 @@ public class OrderModel {
     public OrderModel() {
     }
 
-    public OrderModel(CartModel order, String email, String orderDate, String appoimentDate, String orderStatus) {
+    public OrderModel(CartModel order, com.example.stylessmiles.model.usermodel usermodel, String orderDate, String appoimentDate, String orderStatus) {
         this.order = order;
-        this.email = email;
+        this.user = usermodel;
         this.orderDate = orderDate;
         AppoimentDate = appoimentDate;
         this.orderStatus = orderStatus;
@@ -28,12 +30,12 @@ public class OrderModel {
         this.order = order;
     }
 
-    public String getEmail() {
-        return email;
+    public com.example.stylessmiles.model.usermodel getUsermodel() {
+        return user;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsermodel(com.example.stylessmiles.model.usermodel usermodel) {
+        this.user = usermodel;
     }
 
     public String getOrderDate() {
@@ -66,5 +68,22 @@ public class OrderModel {
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
+    }
+
+    public String updateStatus() {
+        if(this.orderStatus.equals("Order Placed")){
+            this.orderStatus = "Order Accepted";
+        return this.orderStatus;
+        }
+        if(this.orderStatus.equals("Order Accepted")){
+            this.orderStatus = "Order Completed";
+            return this.orderStatus;
+        }
+        return this.orderStatus;
+    }
+
+    public String cancelOrder() {
+        this.orderStatus = "Order Cancelled";
+        return this.orderStatus;
     }
 }

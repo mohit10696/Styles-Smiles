@@ -1,6 +1,7 @@
 package com.example.stylessmiles.ui.gallery;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,7 @@ public class GalleryFragment extends Fragment {
 //                    value.getValue(orderModel);
                     orders.add(value.getValue(OrderModel.class));
                     orders.get(i).setOrderNo(value.getKey());
+                    i++;
                     praseOrders();
                 }
 

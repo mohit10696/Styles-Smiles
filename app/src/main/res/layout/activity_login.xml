@@ -82,12 +82,24 @@
             android:onClick="login"
             android:text="LOGIN"/>
 
+        <Button
+            android:textColor="@color/white"
+            android:background="@drawable/btn_bg_selector"
+            android:layout_marginTop="20px"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/btn_loginasb"
+            android:layout_below="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="loginAsBusiness"
+            android:text="LOGIN AS BUSINESS"/>
+
         <TextView
             android:textColor="@color/black"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30px"
             android:id="@+id/tv_signup"
-            android:layout_below="@+id/btn_login"
+            android:layout_below="@+id/btn_loginasb"
             android:layout_width="wrap_content"
             android:layout_marginBottom="100px"
             android:text="Don't have an account ? Sign up"

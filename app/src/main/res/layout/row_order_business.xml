@@ -1,0 +1,186 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="50px">
+
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/tv_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client Name: "/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:layout_toRightOf="@+id/tv_client"
+        android:id="@+id/tv_client_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mohit Sojitra"/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:layout_below="@+id/tv_client"
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client Number: "/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:layout_below="@+id/tv_client"
+        android:layout_toRightOf="@+id/tv_number"
+        android:id="@+id/tv_client_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9874563210"/>
+
+    <TextView
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/tv_client_number"
+        android:id="@+id/orderid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Id :"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_marginTop="20px"
+        android:id="@+id/tv_orderid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_client_number"
+        android:layout_toRightOf="@+id/orderid"
+        android:text="adgadgdagdagd"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_orderstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="Order Placed"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/orderdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orderid"
+        android:text="19/02/2021 02:50PM:"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/appoitmentdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orderdate"
+        android:layout_marginTop="20px"
+        android:text="Appointment Date : "
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_appoitmentdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appoitmentdate"
+        android:text="19/02/2021 02:50PM:"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/deliveredto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_appoitmentdate"
+        android:layout_marginTop="20px"
+        android:text="Delieverd to : "
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/deliveredto"
+        android:text="249 home"
+        android:textColor="@color/black" />
+
+    <View
+        android:id="@+id/hr_line_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tv_address"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="20px"
+        android:background="#c0c0c0" />
+
+    <TextView
+        android:id="@+id/tv_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hr_line_1"
+        android:text="ITEMS"
+        android:textColor="@color/black" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_orders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_item" />
+
+    <View
+        android:id="@+id/hr_line_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/rv_orders"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="20px"
+        android:background="#c0c0c0" />
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hr_line_2"
+        android:text="Total"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hr_line_2"
+        android:layout_alignParentEnd="true"
+        android:text="RS 2540"
+        android:textColor="@color/black" />
+
+    <View android:id="@+id/strut"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_total"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_status"
+        style="Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_total"
+        android:layout_alignRight="@id/strut"
+        android:layout_alignParentLeft="true"
+        android:backgroundTint="@color/acptorder"
+        android:text="ACCEPT ORDER" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cancelOrder"
+        style="Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_total"
+        android:backgroundTint="@color/red"
+        android:layout_alignLeft="@id/strut"
+        android:layout_alignParentRight="true"
+        android:text="CANCEL BOOKING" />
+
+</RelativeLayout>

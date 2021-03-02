@@ -8,6 +8,9 @@ import java.util.List;
 public class CartModel {
     int totalPrice = 0;
     String saloonname = "";
+
+
+
     List<ProductModel> products = new ArrayList<ProductModel>();
     List<ServicesModel> services = new ArrayList<ServicesModel>();
     List<Integer> productQuantity = new ArrayList<Integer>();
@@ -144,4 +147,6 @@ public class CartModel {
         }
 //        this.productQuantity = productQuantity;
     }
+
+
 }

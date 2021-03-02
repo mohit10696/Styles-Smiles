@@ -50,11 +50,11 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         if (position < products.size()) {
             Picasso.get().load(products.get(position).getImage()).into(holder.iv_product);
             holder.tv_productname.setText(products.get(position).getName() + " x " +productQ.get(position).toString());
-            holder.tv_productprice.setText(products.get(position).getPrice());
+            holder.tv_productprice.setText("Rs. "+products.get(position).getPrice());
         } else {
             position = position - products.size();
             holder.tv_productname.setText(services.get(position).getName());
-            holder.tv_productprice.setText(services.get(position).getPrice());
+            holder.tv_productprice.setText("Rs. "+services.get(position).getPrice());
             Picasso.get().load(services.get(position).getImage()).into(holder.iv_product);
         }
     }
