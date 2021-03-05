@@ -29,10 +29,20 @@
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/tv_orderstatus"
+        android:id="@+id/tv_saloonname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_saloon"
+        android:layout_alignParentEnd="true"
+        android:textStyle="bold"
+        android:text="null"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_orderstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_saloonname"
         android:layout_alignParentEnd="true"
         android:text="Order Placed"
         android:textColor="@color/black" />

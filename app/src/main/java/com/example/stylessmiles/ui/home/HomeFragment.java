@@ -35,24 +35,32 @@ import java.util.List;
 
 import butterknife.BindView;
 
+import static android.content.ContentValues.TAG;
+
 public class HomeFragment extends Fragment {
 
     private DatabaseReference mDatabase;
     List<SaloonModel> saloons;
+    List<SaloonModel> filterdSaloons;
     LinearLayoutManager layoutManager;
     @BindView(R.id.recycle_saloon)
     RecyclerView saloonRecycle;
     View root;
     TextView tv_selectcity;
-    String[] city = {"Surat", "Bharuch", "Ankleshwar", "Ahmedabad"};
-
+    String s_city;
+    String[] city = {"All Salon","Surat", "Bharuch", "Ankleshwar", "Ahmedabad"};
+    SaloonListAdapter adapter;
+    TextView tv_selectedCity;
+    AlertDialog dialog;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         tv_selectcity = root.findViewById(R.id.tv_changecity);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         saloons = new ArrayList<SaloonModel>();
-
+        filterdSaloons = new ArrayList<SaloonModel>();
+        tv_selectedCity = root.findViewById(R.id.tv_selectedCity);
+        tv_selectedCity.setText(city[0]);
         loadSaloon();
         CityChange();
         return root;
@@ -64,6 +72,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
                 View mView = getLayoutInflater().inflate(R.layout.selectcity_layout, null);
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
                 final Spinner selectCity = (Spinner) mView.findViewById(R.id.sp_selectcity);
                 ArrayAdapter aa = new ArrayAdapter(mView.getContext(), android.R.layout.simple_spinner_item, city);
                 aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -71,7 +82,8 @@ public class HomeFragment extends Fragment {
                 selectCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            String s_city = city[position];
+                        s_city = city[position];
+
                     }
 
                     @Override
@@ -80,12 +92,37 @@ public class HomeFragment extends Fragment {
                     }
                 });
                 Button Submit = (Button) mView.findViewById(R.id.btn_submit);
+                Submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        applyfilter();
+                        dialog.hide();
+                    }
+                });
                 Button Cancel = (Button) mView.findViewById(R.id.btn_cancel);
-                mBuilder.setView(mView);
-                final AlertDialog dialog = mBuilder.create();
-                dialog.show();
+                Cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.hide();
+                    }
+                });
+
             }
         });
+    }
+
+    private void applyfilter() {
+        filterdSaloons.clear();
+        saloons.stream().filter(saloonModel -> saloonModel.getCity().equals(s_city)).forEach(saloonModel ->
+                filterdSaloons.add(saloonModel)
+
+        );
+        tv_selectedCity.setText(s_city);
+        adapter = new SaloonListAdapter(filterdSaloons, getActivity());
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        saloonRecycle.setLayoutManager(layoutManager);
+        saloonRecycle.setAdapter(adapter);
     }
 
     private void loadSaloon() {
@@ -97,11 +134,12 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : dataSnapshot2.getChildren()) {
                     saloons.add(new SaloonModel(dataSnapshot.getKey(), dataSnapshot.child("Address").getValue().toString(), dataSnapshot.child("City").getValue().toString(), dataSnapshot.child("Image").getValue().toString()));
                     saloonRecycle = root.findViewById(R.id.recycle_saloon);
-                    SaloonListAdapter adapter = new SaloonListAdapter(saloons, getActivity());
+                    adapter = new SaloonListAdapter(saloons, getActivity());
                     layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                     saloonRecycle.setLayoutManager(layoutManager);
                     saloonRecycle.setAdapter(adapter);
                     centralStore.getInstance().setSaloons(saloons);
+//                    adapter.notifyDataSetChanged();
                     loadCart();
                 }
             }

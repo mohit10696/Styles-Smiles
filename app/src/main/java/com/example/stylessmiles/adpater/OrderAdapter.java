@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.stylessmiles.R;
 import com.example.stylessmiles.centralStore;
 import com.example.stylessmiles.model.OrderModel;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -50,10 +51,22 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.tv_appoitmentdate.setText(order.get(position).getAppoimentDate());
         holder.tv_address.setText(centralStore.getInstance().getUser().getAddress());
         holder.tv_total.setText("Rs. "+String.valueOf(order.get(position).getOrder().getTotalPrice()));
-
+        holder.tv_saloonname.setText(order.get(position).getOrder().getSaloonname());
+        if(order.get(position).getOrderStatus().equals("Cancelled")){
+            holder.btn_cancelOrder.setText("Order Cancelled");
+            holder.btn_cancelOrder.setEnabled(false);
+        }
         holder.btn_cancelOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                order.get(position).setOrderStatus("Cancelled");
+                centralStore.getInstance().mDatabase.child("Order").child(order.get(position).getOrderNo()).setValue(order.get(position)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        holder.btn_cancelOrder.setText("Order Cancelled");
+                        holder.btn_cancelOrder.setEnabled(false);
+                    }
+                });
                 Toast.makeText(context, "Order Cancelled", Toast.LENGTH_SHORT).show();
             }
         });
@@ -73,6 +86,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView iv_saloon;
         public TextView tv_orderid;
+        public TextView tv_saloonname;
         public TextView tv_orderstatus;
         public TextView orderdate;
         public TextView tv_appoitmentdate;
@@ -85,6 +99,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             super(itemView);
             iv_saloon = itemView.findViewById(R.id.iv_saloon);
             tv_orderid = itemView.findViewById(R.id.tv_orderid);
+            tv_saloonname = itemView.findViewById(R.id.tv_saloonname);
             tv_orderstatus = itemView.findViewById(R.id.tv_orderstatus);
             orderdate = itemView.findViewById(R.id.orderdate);
             tv_appoitmentdate = itemView.findViewById(R.id.tv_appoitmentdate);

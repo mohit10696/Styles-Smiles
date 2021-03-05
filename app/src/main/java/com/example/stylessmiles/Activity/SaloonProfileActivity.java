@@ -3,6 +3,8 @@ package com.example.stylessmiles.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -67,6 +69,15 @@ public class SaloonProfileActivity extends AppCompatActivity {
         getSaloonServiceData();
         getSaloonProductData();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // R.menu.mymenu is a reference to an xml file named mymenu.xml which should be inside your res/menu directory.
+        // If you don't have res/menu, just create a directory named "menu" inside res
+        getMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
 
     private void getSaloonProductData() {
         productList = new ArrayList<ProductModel>();
@@ -151,5 +162,9 @@ public class SaloonProfileActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         productRecycle.setLayoutManager(layoutManager);
         productRecycle.setAdapter(adapter);
+    }
+
+    public void loadCartActivity(MenuItem item) {
+        startActivity(new Intent(getApplicationContext(), Cart.class));
     }
 }

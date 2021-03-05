@@ -5,7 +5,6 @@ import android.util.Log;
 import com.example.stylessmiles.model.CartModel;
 import com.example.stylessmiles.model.SaloonModel;
 import com.example.stylessmiles.model.usermodel;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -15,18 +14,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
-
 public class centralStore {
     public static String salonMail = "";
     private static centralStore mInstance;
-    public static  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:sss' '");
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:sss' '");
     public static List<SaloonModel> saloons = new ArrayList<>();
     public static usermodel user = new usermodel();
     public static CartModel cart = new CartModel();
     public static FirebaseDatabase rootnode;
     public static DatabaseReference mDatabase;
+
     public static synchronized centralStore getInstance() {
+        rootnode = FirebaseDatabase.getInstance();
+        mDatabase = rootnode.getReference();
         if (mInstance != null) {
             //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             return mInstance;
@@ -35,11 +35,11 @@ public class centralStore {
         }
     }
 
-    public static String getSaloonImage(String salonname){
+    public static String getSaloonImage(String salonname) {
 
-        for(int i = 0 ; i < saloons.size(); i++){
-            Log.e(salonname, "getSaloonImage: "+saloons.get(i).getName() );
-            if(saloons.get(i).getName().equals(salonname)){
+        for (int i = 0; i < saloons.size(); i++) {
+            Log.e(salonname, "getSaloonImage: " + saloons.get(i).getName());
+            if (saloons.get(i).getName().equals(salonname)) {
                 return saloons.get(i).getImgurl();
             }
         }
@@ -62,20 +62,13 @@ public class centralStore {
         centralStore.user = user;
     }
 
-    public static void synccart(){
-        rootnode = FirebaseDatabase.getInstance();
-        mDatabase = rootnode.getReference("user").child(getUser().getEmail().replace('.','_'));
-        mDatabase.child("cart").setValue(cart).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.e(TAG, "onSuccess: "+"cart updated" );
-            }
-        });
+    public static void synccart() {
+        mDatabase = rootnode.getReference("user").child(getUser().getEmail().replace('.', '_'));
+//        mDatabase.child("cart").setValue(cart);
     }
 
-    public static String capitalize(String str)
-    {
-        if(str == null) return str;
+    public static String capitalize(String str) {
+        if (str == null) return str;
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
@@ -83,7 +76,7 @@ public class centralStore {
         return dateFormat.parse(date);
     }
 
-    public static String getStringDate(Date date){
+    public static String getStringDate(Date date) {
         return dateFormat.format(date);
     }
 

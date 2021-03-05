@@ -52,6 +52,7 @@ public class GalleryFragment extends Fragment {
         databaseReference.child("Order").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                orders.clear();
 //                    Toast.makeText(getContext(),snapshot.getValue().toString(),Toast.LENGTH_LONG).show();
                 int i = 0;
                 for(DataSnapshot value : snapshot.getChildren()){

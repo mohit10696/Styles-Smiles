@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     TextView tv_username;
     TextView tv_email;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +35,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         firebaseAuth = FirebaseAuth.getInstance();
-
+        intent = getIntent();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_logout)
                 .setDrawerLayout(drawer)
@@ -61,8 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+//        "fragmentname"
+        if (intent.getStringExtra("fragmentname") != null) {
+            navController.navigate(R.id.nav_slideshow);
+        }
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadCartActivity(MenuItem item) {
-        startActivity(new Intent(getApplicationContext(),Cart.class));
+        startActivity(new Intent(getApplicationContext(), Cart.class));
     }
+
 }

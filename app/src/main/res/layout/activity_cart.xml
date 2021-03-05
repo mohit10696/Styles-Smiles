@@ -71,20 +71,19 @@
         android:textColor="@color/darkergrey" />
 
     <RelativeLayout
-
         android:id="@+id/rel_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:paddingLeft="60px"
-        android:paddingTop="60px"
+        android:paddingTop="40px"
         android:paddingRight="60px"
         android:paddingBottom="60px">
 
 
         <TextView
-            android:textSize="50px"
+            android:textSize="40px"
             android:id="@+id/tv_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -93,7 +92,20 @@
             android:text="ADDress avse aya"
             android:textColor="@color/black" />
 
+        <Button
+            android:id="@+id/btn_changeaddress"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change Address"
+            android:layout_alignParentEnd="true"
+            android:onClick="changeAddress"
+            android:padding="0px"
+            android:layout_below="@+id/tv_address"/>
+
         <TextView
+            android:layout_marginTop="40px"
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,6 +125,7 @@
 
 
         <TextView
+            android:layout_marginTop="40px"
             android:id="@+id/tv_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -136,11 +149,10 @@
             android:id="@+id/tv_selectdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_address"
+            android:layout_below="@+id/btn_changeaddress"
             android:layout_alignParentEnd="true"
             android:gravity="center_vertical"
             android:onClick="selectdate"
-
             android:layout_marginRight="5px"
             android:text="Select Date &amp; time" />
 

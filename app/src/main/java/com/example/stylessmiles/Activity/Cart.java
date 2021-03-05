@@ -2,6 +2,7 @@ package com.example.stylessmiles.Activity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -167,5 +168,11 @@ public class Cart extends AppCompatActivity implements DatePickerDialog.OnDateSe
 
     public void selectdate(View view) {
         PickDateAndTime();
+    }
+
+    public void changeAddress(View view) {
+        Intent intent = new Intent(Cart.this,MainActivity.class);
+        intent.putExtra("fragmentname","profile");
+        startActivity(intent);
     }
 }
