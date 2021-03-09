@@ -1,6 +1,8 @@
 package com.example.stylessmiles.adpater;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,22 +54,38 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.tv_address.setText(centralStore.getInstance().getUser().getAddress());
         holder.tv_total.setText("Rs. "+String.valueOf(order.get(position).getOrder().getTotalPrice()));
         holder.tv_saloonname.setText(order.get(position).getOrder().getSaloonname());
-        if(order.get(position).getOrderStatus().equals("Cancelled")){
-            holder.btn_cancelOrder.setText("Order Cancelled");
+        if(!order.get(position).getOrderStatus().equals("Order Placed")){
+            holder.btn_cancelOrder.setText(order.get(position).getOrderStatus());
             holder.btn_cancelOrder.setEnabled(false);
         }
+
         holder.btn_cancelOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                order.get(position).setOrderStatus("Cancelled");
-                centralStore.getInstance().mDatabase.child("Order").child(order.get(position).getOrderNo()).setValue(order.get(position)).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        holder.btn_cancelOrder.setText("Order Cancelled");
-                        holder.btn_cancelOrder.setEnabled(false);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle(R.string.app_name);
+                builder.setMessage("Are you sure ?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        order.get(position).setOrderStatus("Cancelled");
+                        centralStore.getInstance().mDatabase.child("Order").child(order.get(position).getOrderNo()).setValue(order.get(position)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                holder.btn_cancelOrder.setText("Order Cancelled");
+                                holder.btn_cancelOrder.setEnabled(false);
+                            }
+                        });
+                        Toast.makeText(context, "Order Cancelled", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
                     }
                 });
-                Toast.makeText(context, "Order Cancelled", Toast.LENGTH_SHORT).show();
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
         Picasso.get().load(centralStore.getSaloonImage(order.get(position).getOrder().getSaloonname())).into(holder.iv_saloon);

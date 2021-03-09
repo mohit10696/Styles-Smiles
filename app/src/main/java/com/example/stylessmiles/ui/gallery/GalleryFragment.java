@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.stylessmiles.R;
 import com.example.stylessmiles.adpater.OrderAdapter;
 import com.example.stylessmiles.adpater.SaloonListAdapter;
+import com.example.stylessmiles.centralStore;
 import com.example.stylessmiles.model.OrderModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +34,7 @@ import java.util.List;
 public class GalleryFragment extends Fragment {
 
     List<OrderModel> orders;
+    List<OrderModel> filteredOrders;
     RecyclerView rv_order;
     LinearLayoutManager layoutManager;
     View root;
@@ -42,6 +44,7 @@ public class GalleryFragment extends Fragment {
 
         root = inflater.inflate(R.layout.fragment_gallery, container, false);
         orders = new ArrayList<OrderModel>();
+        filteredOrders = new ArrayList<OrderModel>();
         rv_order = root.findViewById(R.id.ordersRecycle);
         fetchOrder();
         return root;
@@ -74,7 +77,13 @@ public class GalleryFragment extends Fragment {
     }
 
     private void praseOrders() {
-        OrderAdapter adapter = new OrderAdapter(orders, getActivity());
+        filteredOrders.clear();
+        for(int i = 0 ; i < orders.size();i++){
+            if(orders.get(i).getUsermodel().getEmail().equals(centralStore.getInstance().getUser().getEmail())){
+                filteredOrders.add(orders.get(i));
+            }
+        }
+        OrderAdapter adapter = new OrderAdapter(filteredOrders, getActivity());
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rv_order.setLayoutManager(layoutManager);
         rv_order.setAdapter(adapter);
