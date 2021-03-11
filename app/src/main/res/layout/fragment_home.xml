@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment"
-    android:background="@color/grey">
+    android:background="@color/grey"
+    tools:context=".ui.home.HomeFragment">
 
     <RelativeLayout
         android:id="@+id/rl_selectcity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10px"
         android:background="@color/lightorange"
+        android:padding="10px"
 
         >
 
@@ -19,33 +19,37 @@
             android:id="@+id/iv_map"
             android:layout_width="80px"
             android:layout_height="80px"
-            android:scaleType="fitXY"
-            android:layout_marginLeft="50px"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="50px"
+            android:scaleType="fitXY"
             android:src="@drawable/map" />
 
         <TextView
             android:id="@+id/tv_selectedCity"
-            android:textColor="@color/black"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/iv_map"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="30px"
-            android:textSize="50px"
-            android:text="Surat" />
+            android:layout_toEndOf="@+id/iv_map"
+            android:text="Surat"
+            android:textColor="@color/black"
+            android:textSize="50px" />
 
         <TextView
-            android:layout_centerVertical="true"
             android:id="@+id/tv_changecity"
-            android:text="Change city"
-            android:layout_marginRight="40px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50px"
-            android:clickable="true"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="40px"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
+            android:text="Change city"
             android:textColor="@color/black"
+            android:textSize="50px"
 
             />
     </RelativeLayout>

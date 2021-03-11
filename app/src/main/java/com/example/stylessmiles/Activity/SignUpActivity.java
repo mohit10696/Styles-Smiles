@@ -1,8 +1,5 @@
 package com.example.stylessmiles.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.kloadingspin.KLoadingSpin;
 import com.example.stylessmiles.R;
 import com.example.stylessmiles.centralStore;
 import com.example.stylessmiles.model.usermodel;
@@ -20,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
+
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,14 +44,17 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
     FirebaseDatabase rootnode;
+    @BindView(R.id.LoadingSpin)
+    KLoadingSpin loadingspin;
+    String Email_regex = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try
-        {
+        try {
             this.getSupportActionBar().hide();
+        } catch (NullPointerException e) {
         }
-        catch (NullPointerException e){}
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -63,39 +69,46 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(new Intent(this, Login.class));
     }
 
-    public void Signup(View view){
-        if(et_email.getText().toString().trim().isEmpty()){
+    public void Signup(View view) {
+        if (et_firstname.getText().toString().trim().isEmpty()) {
+            Toast.makeText(this, "Please enter firstname", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (et_lastname.getText().toString().trim().isEmpty()) {
+            Toast.makeText(this, "Please enter lastname", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (et_email.getText().toString().trim().isEmpty() || !Pattern.matches(Email_regex, et_email.getText().toString().trim()) || et_email.getText().toString().trim().toLowerCase().contains("salon.com")) {
             Toast.makeText(this, "Invalid email", Toast.LENGTH_SHORT).show();
             return;
-        }
-        else if(et_password.getText().toString().trim().isEmpty()){
+        } else if (et_password.getText().toString().trim().isEmpty() || et_password.getText().toString().trim().length() < 6) {
             Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
             return;
-        }
-        else if(et_confirmpassword.getText().toString().trim().isEmpty()  || !et_password.getText().toString().trim().equals(et_confirmpassword.getText().toString().trim())){
+        } else if (et_confirmpassword.getText().toString().trim().isEmpty() || !et_password.getText().toString().trim().equals(et_confirmpassword.getText().toString().trim())) {
             Toast.makeText(this, "Password not match", Toast.LENGTH_SHORT).show();
             return;
         }
-        firebaseAuth.createUserWithEmailAndPassword(et_email.getText().toString().trim(),et_password.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        loadingspin.setIsVisible(true);
+        loadingspin.startAnimation();
+        firebaseAuth.createUserWithEmailAndPassword(et_email.getText().toString().trim(), et_password.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                loadingspin.stopAnimation();
+                loadingspin.setIsVisible(false);
+                if (task.isSuccessful()) {
                     usermodel usermodel = new usermodel();
                     usermodel.setFirstname(et_firstname.getText().toString().trim());
                     usermodel.setLastname(et_lastname.getText().toString().trim());
                     usermodel.setEmail(et_email.getText().toString().trim());
                     centralStore.getInstance().user = usermodel;
-                    mDatabase.child(usermodel.getEmail().replace('.','_')).setValue(usermodel);
+                    mDatabase.child(usermodel.getEmail().replace('.', '_')).setValue(usermodel);
                     Toast.makeText(SignUpActivity.this, "User Created", Toast.LENGTH_SHORT).show();
                     Gson gson = new Gson();
                     String json = gson.toJson(usermodel);
                     prefsEditor.putString("user", json);
                     prefsEditor.commit();
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-                }
-                else{
-                    Toast.makeText(SignUpActivity.this, task.getResult().describeContents(),Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SignUpActivity.this, task.getResult().describeContents(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

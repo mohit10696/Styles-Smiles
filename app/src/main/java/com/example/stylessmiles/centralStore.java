@@ -15,6 +15,11 @@ import java.util.Date;
 import java.util.List;
 
 public class centralStore {
+    public static final String orderplaced = "Order Placed";
+    public static final String cancelOrder = "Order Cancelled";
+    public static final String confirmOrder = "Order Confirmed";
+    public static final String completeOrder = "Order Completed";
+
     public static String salonMail = "";
     private static centralStore mInstance;
     public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:sss' '");
@@ -64,7 +69,7 @@ public class centralStore {
 
     public static void synccart() {
         mDatabase = rootnode.getReference("user").child(getUser().getEmail().replace('.', '_'));
-//        mDatabase.child("cart").setValue(cart);
+        mDatabase.child("cart").setValue(cart);
     }
 
     public static String capitalize(String str) {

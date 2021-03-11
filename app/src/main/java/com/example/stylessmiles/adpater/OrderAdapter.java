@@ -60,8 +60,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         }
 
         holder.btn_cancelOrder.setOnClickListener(new View.OnClickListener() {
+            
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle(R.string.app_name);
                 builder.setMessage("Are you sure ?");
@@ -71,7 +73,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                         centralStore.getInstance().mDatabase.child("Order").child(order.get(position).getOrderNo()).setValue(order.get(position)).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                holder.btn_cancelOrder.setText("Order Cancelled");
+                                holder.btn_cancelOrder.setText(centralStore.cancelOrder);
                                 holder.btn_cancelOrder.setEnabled(false);
                             }
                         });

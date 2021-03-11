@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/grey"
     tools:context=".Activity.SignUpActivity">
 
@@ -24,11 +24,11 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_below="@id/logo"
-        android:layout_marginTop="-50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
         android:layout_marginLeft="40px"
+        android:layout_marginTop="-50dp"
         android:layout_marginRight="40px"
         android:background="@drawable/round_outline"
         android:gravity="center"
@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="80px"
             android:gravity="center"
+
             android:text="SIGN UP"
             android:textColor="@color/yellowish"
             android:textSize="70px" />
@@ -51,7 +52,9 @@
             android:layout_below="@+id/txtLogin"
             android:layout_marginTop="70px"
             android:background="@drawable/edittextbackground"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:hint="First name"
+            android:inputType="text"
             android:paddingLeft="30px"
             android:textColor="@color/black"
             android:textColorHint="@color/grey" />
@@ -63,7 +66,9 @@
             android:layout_below="@+id/et_firstname"
             android:layout_marginTop="30px"
             android:background="@drawable/edittextbackground"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:hint="Last name"
+            android:inputType="text"
             android:paddingLeft="30px"
             android:textColor="@color/black"
             android:textColorHint="@color/grey" />
@@ -107,17 +112,17 @@
             android:textColorHint="@color/grey" />
 
         <Button
-            android:textColor="@color/white"
-            android:backgroundTint="@color/yellowish"
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/et_confirmpassword"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="80px"
-            android:onClick="Signup"
             android:background="@drawable/btn_bg_selector"
-            android:text="SIGN UP" />
+            android:backgroundTint="@color/yellowish"
+            android:onClick="Signup"
+            android:text="SIGN UP"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tv_signup"
@@ -127,10 +132,26 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30px"
             android:layout_marginBottom="80px"
+            android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
+            android:focusable="true"
             android:onClick="loadSignin"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
             android:text="Already have an account ? Sign in"
             android:textColor="@color/black" />
 
     </RelativeLayout>
+
+    <com.example.kloadingspin.KLoadingSpin
+        android:id="@+id/LoadingSpin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:backgroundColor="#55008DFF"
+        app:primarySpinnerColor="#ffffff"
+        app:rotationSpeedInMs="3000"
+        app:secondarySpinnerColor="#FF9800"
+        app:text="Please wait"
+        app:textColor="#ffffff"
+        app:textSize="80" />
 </RelativeLayout>

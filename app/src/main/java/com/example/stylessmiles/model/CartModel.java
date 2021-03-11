@@ -1,6 +1,8 @@
 package com.example.stylessmiles.model;
 
 import com.example.stylessmiles.centralStore;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +11,8 @@ public class CartModel {
     int totalPrice = 0;
     String saloonname = "";
 
-
+    public static FirebaseDatabase rootnode;
+    public static DatabaseReference mDatabase;
 
     List<ProductModel> products = new ArrayList<ProductModel>();
     List<ServicesModel> services = new ArrayList<ServicesModel>();
@@ -48,7 +51,7 @@ public class CartModel {
 
     public void removeService(int index) {
         this.services.remove(index);
-        if(this.services.size() == 0){
+        if (this.services.size() == 0) {
             this.saloonname = "";
         }
         Calcost();
@@ -61,13 +64,15 @@ public class CartModel {
     }
 
     public int updateQunatity(int index, int qunatity) {
-        int newQunatity = this.productQuantity.get(index)+ qunatity;
+        int newQunatity = this.productQuantity.get(index) + qunatity;
         this.productQuantity.set(index, newQunatity);
         Calcost();
         return newQunatity;
     }
 
     public void Calcost() {
+//        rootnode = FirebaseDatabase.getInstance();
+//        mDatabase = rootnode.getReference();
         totalPrice = 0;
         for (int i = 0; i < products.size(); i++) {
             totalPrice = totalPrice + Integer.parseInt(products.get(i).price) * productQuantity.get(i);
@@ -76,6 +81,8 @@ public class CartModel {
             totalPrice = totalPrice + Integer.parseInt(servicesModel.getPrice());
         }
         centralStore.getInstance().synccart();
+//        mDatabase = rootnode.getReference("user").child(centralStore.getInstance().getUser().getEmail().replace('.', '_'));
+//        mDatabase.child("cart").setValue(centralStore.getInstance().cart);
     }
 
     public boolean setSaloon(String saloonname) {
@@ -93,7 +100,7 @@ public class CartModel {
         return this.productQuantity.get(id);
     }
 
-    public void addProductQuantity(int q){
+    public void addProductQuantity(int q) {
         this.productQuantity.add(q);
     }
 
@@ -119,8 +126,7 @@ public class CartModel {
 
     public void setProducts(List<ProductModel> products) {
 //        this.products = products;
-        for(ProductModel productModel : products)
-        {
+        for (ProductModel productModel : products) {
             this.products.add(productModel);
         }
     }
@@ -130,8 +136,7 @@ public class CartModel {
     }
 
     public void setServices(List<ServicesModel> services) {
-        for(ServicesModel servicesModel : services)
-        {
+        for (ServicesModel servicesModel : services) {
             this.services.add(servicesModel);
         }
 //        this.services = services;
@@ -142,7 +147,7 @@ public class CartModel {
     }
 
     public void setProductQuantity(List<Integer> productQuantity) {
-        for (Integer i : productQuantity){
+        for (Integer i : productQuantity) {
             this.productQuantity.add(i);
         }
 //        this.productQuantity = productQuantity;

@@ -1,6 +1,6 @@
 package com.example.stylessmiles.model;
 
-
+import com.example.stylessmiles.centralStore;
 import com.example.stylessmiles.Activity.OrderStatus;
 
 public class OrderModel {
@@ -8,18 +8,29 @@ public class OrderModel {
     usermodel user = new usermodel();
     String orderDate;
     String AppoimentDate;
-    String orderStatus;
+    public String orderStatus;
     String orderNo = "";
+    String orderType = "";
 
     public OrderModel() {
     }
 
-    public OrderModel(CartModel order, com.example.stylessmiles.model.usermodel usermodel, String orderDate, String appoimentDate, String orderStatus) {
+    public OrderModel(CartModel order, com.example.stylessmiles.model.usermodel usermodel, String orderDate, String appoimentDate, String orderStatus,String orderType) {
         this.order = order;
         this.user = usermodel;
         this.orderDate = orderDate;
         AppoimentDate = appoimentDate;
         this.orderStatus = orderStatus;
+        this.orderType = orderType;
+    }
+
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 
     public CartModel getOrder() {
@@ -71,19 +82,19 @@ public class OrderModel {
     }
 
     public String updateStatus() {
-        if(this.orderStatus.equals("Order Placed")){
-            this.orderStatus = "Order Accepted";
+        if(this.orderStatus.equals(centralStore.orderplaced)){
+            this.orderStatus = centralStore.confirmOrder;
         return this.orderStatus;
         }
-        if(this.orderStatus.equals("Order Accepted")){
-            this.orderStatus = "Order Completed";
+        if(this.orderStatus.equals(centralStore.confirmOrder)){
+            this.orderStatus = centralStore.completeOrder;
             return this.orderStatus;
         }
         return this.orderStatus;
     }
 
     public String cancelOrder() {
-        this.orderStatus = "Order Cancelled";
+        this.orderStatus = centralStore.cancelOrder;
         return this.orderStatus;
     }
 }

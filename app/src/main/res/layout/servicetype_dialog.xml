@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="40px">
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:text=":: Please select the service type ::"
+        android:layout_marginBottom="30px"
+        android:layout_height="wrap_content"/>
+
+    <RadioGroup
+        android:layout_below="@id/tv_1"
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/purple_200"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:buttonTint="@color/purple_200"
+            android:id="@+id/radio_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Place Appointment at Salon"
+            android:textSize="50px" />
+
+        <RadioButton
+            android:buttonTint="@color/purple_200"
+            android:id="@+id/radio_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Home Service"
+            android:textSize="50px" />
+    </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_confirmorder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radioGroup"
+        android:layout_marginLeft="300px"
+        android:drawableRight="@drawable/next_arrow"
+        android:text="Confirm Order" />
+
+</RelativeLayout>

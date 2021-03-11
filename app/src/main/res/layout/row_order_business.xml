@@ -1,55 +1,59 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="50px">
+    android:layout_marginTop="30px"
+    android:background="@color/white"
+    android:padding="50px"
+    app:cardCornerRadius="12dp">
 
     <TextView
-        android:textColor="@color/black"
         android:id="@+id/tv_client"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Client Name: "/>
+        android:text="Client Name: "
+        android:textColor="@color/black" />
 
     <TextView
-        android:textColor="@color/black"
-        android:layout_toRightOf="@+id/tv_client"
         android:id="@+id/tv_client_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mohit Sojitra"/>
+        android:layout_toRightOf="@+id/tv_client"
+        android:text=""
+        android:textColor="@color/black" />
 
     <TextView
-        android:textColor="@color/black"
-        android:layout_below="@+id/tv_client"
         android:id="@+id/tv_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Client Number: "/>
+        android:layout_below="@+id/tv_client"
+        android:text="Client Number: "
+        android:textColor="@color/black" />
 
     <TextView
-        android:textColor="@color/black"
-        android:layout_below="@+id/tv_client"
-        android:layout_toRightOf="@+id/tv_number"
         android:id="@+id/tv_client_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="9874563210"/>
+        android:layout_below="@+id/tv_client"
+        android:layout_toRightOf="@+id/tv_number"
+        android:text="9874563210"
+        android:textColor="@color/black" />
 
     <TextView
-        android:layout_marginTop="20px"
-        android:layout_below="@+id/tv_client_number"
         android:id="@+id/orderid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_client_number"
+        android:layout_marginTop="20px"
         android:text="Order Id :"
         android:textColor="@color/black" />
 
     <TextView
-        android:layout_marginTop="20px"
         android:id="@+id/tv_orderid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_client_number"
+        android:layout_marginTop="20px"
         android:layout_toRightOf="@+id/orderid"
         android:text="adgadgdagdagd"
         android:textColor="@color/black" />
@@ -60,7 +64,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:text="Order Placed"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="50px"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/orderdate"
@@ -155,11 +161,12 @@
         android:text="RS 2540"
         android:textColor="@color/black" />
 
-    <View android:id="@+id/strut"
+    <View
+        android:id="@+id/strut"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/tv_total"/>
+        android:layout_below="@+id/tv_total"
+        android:layout_centerHorizontal="true" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_status"
@@ -178,9 +185,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_total"
-        android:backgroundTint="@color/red"
         android:layout_alignLeft="@id/strut"
         android:layout_alignParentRight="true"
+        android:backgroundTint="@color/red"
         android:text="CANCEL BOOKING" />
 
 </RelativeLayout>

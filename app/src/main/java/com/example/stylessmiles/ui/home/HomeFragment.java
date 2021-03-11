@@ -35,8 +35,6 @@ import java.util.List;
 
 import butterknife.BindView;
 
-import static android.content.ContentValues.TAG;
-
 public class HomeFragment extends Fragment {
 
     private DatabaseReference mDatabase;
@@ -48,10 +46,11 @@ public class HomeFragment extends Fragment {
     View root;
     TextView tv_selectcity;
     String s_city;
-    String[] city = {"All Salon","Surat", "Bharuch", "Ankleshwar", "Ahmedabad"};
+    String[] city = {"All Salon", "Surat", "Bharuch", "Ankleshwar", "Ahmedabad"};
     SaloonListAdapter adapter;
     TextView tv_selectedCity;
     AlertDialog dialog;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);

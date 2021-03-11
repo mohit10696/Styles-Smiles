@@ -8,64 +8,70 @@
 
 
     <TextView
+        android:id="@+id/tv_saloonname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="30px"
         android:layout_marginTop="30px"
-        android:id="@+id/tv_saloonname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="20dp"
+        android:layout_toLeftOf="@+id/clear"
         android:text="saloonname"
-        />
+        android:textColor="@color/black"
+        android:textSize="18dp" />
 
     <TextView
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="30px"
-        android:layout_marginTop="30px"
         android:id="@+id/clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:text="Clear Cart"
-        android:layout_marginEnd="20px"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="30px"
+        android:layout_marginEnd="7dp"
+        android:background="?android:attr/selectableItemBackground"
+
         android:clickable="true"
+        android:focusable="true"
         android:onClick="clearCart"
-        />
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
+        android:text="Clear Cart"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
 
     <ScrollView
-        android:layout_below="@+id/tv_saloonname"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/rel_1">
-    <RelativeLayout
-        android:layout_below="@+id/tv_saloonname"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/rel_1"
-        android:padding="30px">
+        android:layout_below="@+id/tv_saloonname">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_services"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp" />
+            android:layout_height="match_parent"
+            android:layout_above="@id/rel_1"
+            android:layout_below="@+id/tv_saloonname"
+            android:padding="30px">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rv_services"
-            android:layout_marginBottom="1dp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_services"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp" />
 
-    </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_services"
+                android:layout_marginBottom="1dp" />
+
+        </RelativeLayout>
     </ScrollView>
+
     <TextView
-        android:background="@color/grey"
         android:id="@+id/noticetext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/rel_1"
+        android:background="@color/grey"
         android:text="Note : All the orders &amp; services will be cash on delivery"
         android:textAlignment="center"
         android:textColor="@color/darkergrey" />
@@ -83,36 +89,36 @@
 
 
         <TextView
-            android:textSize="40px"
             android:id="@+id/tv_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20px"
             android:lines="2"
             android:text="ADDress avse aya"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="40px" />
 
         <Button
             android:id="@+id/btn_changeaddress"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change Address"
+            android:layout_below="@+id/tv_address"
             android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/white"
             android:onClick="changeAddress"
-            android:padding="0px"
-            android:layout_below="@+id/tv_address"/>
+            android:padding="10px"
+            android:text="Change Address"
+            android:textColor="@color/black" />
 
         <TextView
-            android:layout_marginTop="40px"
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_address"
+            android:layout_marginTop="40px"
             android:text="Date &amp; Time :"
-            android:textSize="40px"
-            android:textColor="@color/darkergrey" />
+            android:textColor="@color/darkergrey"
+            android:textSize="40px" />
 
         <TextView
             android:id="@+id/tv_datetime"
@@ -125,14 +131,14 @@
 
 
         <TextView
-            android:layout_marginTop="40px"
             android:id="@+id/tv_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_datetime"
+            android:layout_marginTop="40px"
             android:text="Total :"
-            android:textSize="40px"
-            android:textColor="@color/darkergrey" />
+            android:textColor="@color/darkergrey"
+            android:textSize="40px" />
 
         <TextView
             android:id="@+id/tv_totalPrice"
@@ -144,17 +150,17 @@
             android:textSize="60px" />
 
         <Button
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
             android:id="@+id/tv_selectdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_changeaddress"
             android:layout_alignParentEnd="true"
+            android:layout_marginRight="5px"
+            android:backgroundTint="@color/white"
             android:gravity="center_vertical"
             android:onClick="selectdate"
-            android:layout_marginRight="5px"
-            android:text="Select Date &amp; time" />
+            android:text="Select Date &amp; time"
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/placeorder"
@@ -164,8 +170,8 @@
             android:layout_alignParentEnd="true"
             android:gravity="center_vertical"
             android:onClick="placeOrder"
-
-            android:text="Place Order" />
+            android:drawableRight="@drawable/next_arrow"
+            android:text="Next" />
 
     </RelativeLayout>
 

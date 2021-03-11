@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.stylessmiles.R;
-import com.example.stylessmiles.adpater.OrderAdapter;
 import com.example.stylessmiles.adpater.OrderAdapterBusiness;
 import com.example.stylessmiles.centralStore;
 import com.example.stylessmiles.model.OrderModel;
@@ -35,13 +34,16 @@ public class OrderStatus extends AppCompatActivity {
     RecyclerView rv_order;
     LinearLayoutManager layoutManager;
     FirebaseAuth firebaseAuth;
+    SharedPreferences.Editor prefsEditor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_status);
         mPrefs = getPreferences(MODE_PRIVATE);
         orders = new ArrayList<OrderModel>();
-        email = mPrefs.getString("SalonMail", "");
+        email = centralStore.getInstance().salonMail;
+        getSupportActionBar().setTitle(email);
         rv_order = findViewById(R.id.ordersRecycle);
         firebaseAuth = FirebaseAuth.getInstance();
         fetchOrder();
@@ -49,21 +51,33 @@ public class OrderStatus extends AppCompatActivity {
     }
 
     private void fetchOrder() {
+        String parts[] = email.toLowerCase().split("@");
+        if (parts.length < 2) {
+            Toast.makeText(this, email+"Some error occurred"+parts.length, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String salonName = parts[0];
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("Order").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                orders.clear();
 //                    Toast.makeText(getContext(),snapshot.getValue().toString(),Toast.LENGTH_LONG).show();
                 int i = 0;
                 for (DataSnapshot value : snapshot.getChildren()) {
 //                    Toast.makeText(getApplicationContext(), "+1"+i, Toast.LENGTH_SHORT).show();
-                    OrderModel orderModel = new OrderModel();
+                    if(value.child("order").child("saloonname").getValue().toString().toLowerCase().contains(salonName)){
+//                    Toast.makeText(OrderStatus.this, value.child("order").getValue().toString(), Toast.LENGTH_SHORT).show();
+                        OrderModel orderModel = new OrderModel();
 //                    value.getValue(orderModel);
-                    orders.add(value.getValue(OrderModel.class));
-                    orders.get(i).setOrderNo(value.getKey());
-                    i++;
-                    praseOrders();
+                        orders.add(value.getValue(OrderModel.class));
+                        orders.get(i).setOrderNo(value.getKey());
+                        i++;
+                    }
+
                 }
+                praseOrders();
 
             }
 
@@ -75,7 +89,7 @@ public class OrderStatus extends AppCompatActivity {
     }
 
     private void praseOrders() {
-        OrderAdapterBusiness adapter = new OrderAdapterBusiness(orders,this);
+        OrderAdapterBusiness adapter = new OrderAdapterBusiness(orders, this);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv_order.setLayoutManager(layoutManager);
         rv_order.setAdapter(adapter);
