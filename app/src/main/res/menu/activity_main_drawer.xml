@@ -14,11 +14,19 @@
             android:title="@string/menu_gallery" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_baseline_perm_contact_calendar_24"
             android:title="@string/menu_slideshow" />
+
+        <item
+            android:id="@+id/nav_contactus"
+            android:icon="@drawable/ic_baseline_call_24"
+            android:title="Contact us" />
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"
             android:title="Log out" />
+
+
     </group>
 </menu>

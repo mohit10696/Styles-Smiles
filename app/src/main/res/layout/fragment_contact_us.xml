@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="70px"
+    tools:context=".ui.slideshow.SlideshowFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dg_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="Name">
+
+        <!--this is the actual edit text which takes the input-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:enabled="false"
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dg_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dg_name"
+        android:layout_marginTop="40dp"
+        android:hint="Email">
+
+        <!--this is the actual edit text which takes the input-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:enabled="false"
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dg_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dg_email"
+        android:layout_marginTop="40dp"
+        android:lines="5"
+        android:hint="message">
+
+        <!--this is the actual edit text which takes the input-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_contactus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="5"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_submit"
+        style="Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dg_address"
+        android:layout_marginTop="40dp"
+        android:text="SUBMIT" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dg_address"
+        android:layout_marginLeft="60px"
+        android:layout_marginTop="40dp"
+        android:layout_toEndOf="@+id/btn_submit"
+        android:backgroundTint="@color/white"
+        android:text="CANCEL"
+        android:textColor="@color/black" />
+</RelativeLayout>
