@@ -45,11 +45,17 @@
             android:textColor="@color/yellowish"
             android:textSize="100px" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etEmailLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtLogin"
+       >
+
         <EditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_below="@+id/txtLogin"
             android:layout_marginTop="100px"
             android:background="@drawable/edittextbackground"
             android:hint="Email"
@@ -57,24 +63,35 @@
             android:textColor="@color/black"
             android:textColorHint="@color/grey" />
 
-        <EditText
-            android:id="@+id/et_password"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etPasswordLayout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@+id/et_email"
-            android:layout_marginTop="30px"
-            android:background="@drawable/edittextbackground"
-            android:hint="Password (min length: 6)"
-            android:inputType="textPassword"
-            android:paddingLeft="50px"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etEmailLayout"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+
+                android:layout_marginTop="30px"
+                android:background="@drawable/edittextbackground"
+                android:hint="Password (min length: 6)"
+                android:inputType="textPassword"
+                android:paddingLeft="50px"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_password"
+            android:layout_below="@+id/etPasswordLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="80px"
             android:background="@drawable/btn_bg_selector"
